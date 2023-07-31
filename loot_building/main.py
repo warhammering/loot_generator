@@ -35,7 +35,7 @@ from functions.loot_functions import (  # pylint: disable=wrong-import-position
 
 # Functionality for formatting the output
 from functions.format_functions import (  # pylint: disable=wrong-import-position
-    select_mob_synonym,
+    select_building_synonym,
     select_stash_location,
     build_currency_string,
     build_item_string,
@@ -84,7 +84,7 @@ def get_loot_strings(
     # Initialize an empty dictionary to store the loot strings
     loot_strings: dict = {
         # Select a synonym for the building type
-        "building_synonym": select_mob_synonym(building_type),
+        "building_synonym": select_building_synonym(building_type),
         # Select a stash location from the list of possible locations
         "stash_place": select_stash_location(stashed_money_locations),
         # Calculate the total value of gems
@@ -242,33 +242,40 @@ def formatting_loot(
     return format_loot_string(currency_string, loot_strings, item_strings)
 
 
-# Call the select_location function to select a location
-selected_location: str = select_location()
+def loot_building_main():
+    # Call the select_location function to select a location
+    selected_location: str = select_location()
 
-# Get the loot for the selected location
-founded_loot: dict = get_loot(selected_location)
+    # Get the loot for the selected location
+    founded_loot: dict = get_loot(selected_location)
 
-# Other loot found
-other_trappings_found: list = roll_for_items(founded_loot, other_trappings)
+    # Other loot found
+    other_trappings_found: list = roll_for_items(founded_loot, other_trappings)
 
-# Define the loot categories
-loot_categories = [
-    "Gems",
-    "Art",
-    "Cloth",
-    "Domestics",
-]
+    # Define the loot categories
+    loot_categories = [
+        "Gems",
+        "Art",
+        "Cloth",
+        "Domestics",
+    ]
 
-# Separate the loot
-currencies, separated_loot, remaining_items = loot_separation(
-    founded_loot, loot_categories
-)
+    # Separate the loot
+    currencies, separated_loot, remaining_items = loot_separation(
+        founded_loot, loot_categories
+    )
 
-# Get the stash locations for the selected location
-stash_locations: list = location_to_stash_building[selected_location]
+    # Get the stash locations for the selected location
+    stash_locations: list = location_to_stash_building[selected_location]
 
-# Format and print the loot
-print(formatting_loot(founded_loot, selected_location, stash_locations))
+    # Format and print the loot
+    print(
+        "\n****************************************************************************"
+    )
+    print(
+        "****************************************************************************\n\n"
+    )
+    print(formatting_loot(founded_loot, selected_location, stash_locations))
 
-if other_items_found(other_trappings_found) is not None:
-    print(other_items_found(other_trappings_found))
+    if other_items_found(other_trappings_found) is not None:
+        print(other_items_found(other_trappings_found))

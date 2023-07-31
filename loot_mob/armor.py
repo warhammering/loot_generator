@@ -129,10 +129,12 @@ def armour_flaw(allow_roll_twice: bool = True, flaw_list: list = None) -> str:
 # Check if the armor dont fit
 fitting_dice: int = random.randint(1, 4)
 
-# show message that the armor dont fit plus flaws
-print(
-    f"The armor does not fit properly and it needs to be refitted and it has the flaw: \n{armour_flaw()}"
-    # otherwise return the flaws
-    if fitting_dice == 1
-    else f"The armor has the flaw: \n{armour_flaw()}"
-)
+
+def generate_armor_flaw():
+    # show message that the armor dont fit plus flaws
+    print(
+        f"The armor does not fit properly and it needs to be refitted and it has the flaw: \n{armour_flaw()}"
+        # otherwise return the flaws
+        if fitting_dice == 1
+        else f"The armor has the flaw: \n{armour_flaw()}"
+    )

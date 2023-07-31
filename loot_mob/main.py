@@ -242,33 +242,40 @@ def formatting_loot(
     return format_loot_string(currency_string, loot_strings, item_strings)
 
 
-# Call the select_mob function to select a location
-selected_location: str = select_mob()
+def loot_mob_main():
+    # Call the select_mob function to select a location
+    selected_location: str = select_mob()
 
-# Get the loot for the selected location
-founded_loot: dict = get_mob_loot(selected_location)
+    # Get the loot for the selected location
+    founded_loot: dict = get_mob_loot(selected_location)
 
-# Other loot found
-other_trappings_found: list = roll_for_items(founded_loot, other_trappings)
+    # Other loot found
+    other_trappings_found: list = roll_for_items(founded_loot, other_trappings)
 
-# Define the loot categories
-loot_categories = [
-    "Gems",
-    "Art",
-    "Cloth",
-    "Domestics",
-]
+    # Define the loot categories
+    loot_categories = [
+        "Gems",
+        "Art",
+        "Cloth",
+        "Domestics",
+    ]
 
-# Separate the loot
-currencies, separated_loot, remaining_items = loot_separation(
-    founded_loot, loot_categories
-)
+    # Separate the loot
+    currencies, separated_loot, remaining_items = loot_separation(
+        founded_loot, loot_categories
+    )
 
-# Get the stash locations for the selected location
-stash_locations: list = location_to_stash_mob[selected_location]
+    # Get the stash locations for the selected location
+    stash_locations: list = location_to_stash_mob[selected_location]
 
-# Format and print the loot
-print(formatting_loot(founded_loot, selected_location, stash_locations))
+    # Format and print the loot
+    print(
+        "\n****************************************************************************"
+    )
+    print(
+        "****************************************************************************\n\n"
+    )
+    print(f"--- {formatting_loot(founded_loot, selected_location, stash_locations)}")
 
-if other_items_found(other_trappings_found) is not None:
-    print(other_items_found(other_trappings_found))
+    if other_items_found(other_trappings_found) is not None:
+        print(other_items_found(other_trappings_found))

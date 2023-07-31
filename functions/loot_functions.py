@@ -286,9 +286,10 @@ def select_mob() -> str:
     """
     # Prompt the user to select a location
     locations: list = list(mob_loot_table.keys())
-    print("Select a location:")
+
+    print("Select a mob:")
     # Loops trough all locations
     for i, location in enumerate(locations, 1):
         print(f"{i}. {location}")
-    selected: int = int(input("Location: ")) - 1
+    selected: int = int(input("mob: ")) - 1
     return locations[selected]

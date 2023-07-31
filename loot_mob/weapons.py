@@ -131,5 +131,6 @@ def weapon_flaw(allow_roll_twice=True, flaw_list=None) -> str:
     return "\n".join(flaw_list) if flaw_list else ""
 
 
-# show message with the weapons flaws
-print(f"This weapon has the flaw: \n{weapon_flaw()}")
+def generate_weapon_flaw():
+    # show message with the weapons flaws
+    print(f"This weapon has the flaw: \n{weapon_flaw()}")
